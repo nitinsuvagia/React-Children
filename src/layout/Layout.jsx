@@ -10,41 +10,17 @@ const Layouts = {
     main: MainLayout,
 }
 
-let previousPath = ''
-
-const Layout = ({ children, location: { pathname, search } }) => {
-    const currentPath = pathname + search
-    if (currentPath !== previousPath) {
-        window.scrollTo(0, 0)
-    }
-
-    setTimeout(() => {
-        previousPath = currentPath
-    }, 300)
+const Layout = ({ children }) => {
 
     const getLayout = () => {
-        // if (pathname === '/') {
-        //     return 'public'
-        // }
-        // if (/^\/auth(?=\/|$)/i.test(pathname)) {
-        //     return 'auth'
-        // }
-        return 'auth'
+
+        return 'auth'       // Change your Layout as per condition { public / main / auth }
     }
 
     const Container = Layouts[getLayout()]
-    const isAuthLayout = getLayout() === 'auth'
 
     const LayoutCall = () => {
-        // show loader when user in check authorization process, not authorized yet and not on login pages
-        // if (!isAuthLayout) {
-        //     return null
-        // }
-        // // redirect to login page if current is not login page and user not authorized
-        // if (!isAuthLayout) {
-        //     return <div>Not logged-in</div>
-        // }
-        // in other case render previously set layout
+
         return <Container>{children}</Container>
     }
 
